@@ -6,25 +6,12 @@ import java.util.Objects;
 
 public class Main {
     public static void main(String[] args) {
-        // new WeatherReportCore(new WeatherReportFileReader(new WeatherReportFileParser))
-        // sout WeatherReportCore.hottestDay()
-        // sout WeatherReportCore.coldestDay()
 
-        try(
-            BufferedReader reader = new BufferedReader(
-                new InputStreamReader(
-                    Objects.requireNonNull(
-                            Main.class.getClassLoader().getResourceAsStream("input.txt")
-                    )
-                )
-            )
-        ) {
-            String line;
-            while( (line = reader.readLine()) != null ) {
-                System.out.println(line);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        WeatherReportCore weatherReportCore = new WeatherReportCore(
+                new WeatherReportFileReader("input.txt", new WeatherReportFileParser())
+        );
+
+        System.out.println(weatherReportCore.getHottestDay().loggingRepresentation());
+        System.out.println(weatherReportCore.getCoolestDay().loggingRepresentation());
     }
 }
