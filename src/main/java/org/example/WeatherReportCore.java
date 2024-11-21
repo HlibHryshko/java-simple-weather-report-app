@@ -1,15 +1,19 @@
 package org.example;
 
-    /*
-   TODO:
-   make it a singleton
-    */
-
 public class WeatherReportCore {
     private final WeatherReportAnalyzer weatherReportAnalyzer;
+    private static WeatherReportCore instance;
 
-    public WeatherReportCore(WeatherReportFileReader weatherReportFileReader) {
+
+    private WeatherReportCore(WeatherReportFileReader weatherReportFileReader) {
         this.weatherReportAnalyzer = new WeatherReportAnalyzer(weatherReportFileReader.getWeatherReportData());
+    }
+
+    public static synchronized WeatherReportCore getInstance(WeatherReportFileReader weatherReportFileReader) {
+        if (instance == null) {
+            instance = new WeatherReportCore(weatherReportFileReader);
+        }
+        return instance;
     }
 
     public WeatherDay getHottestDay() {

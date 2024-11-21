@@ -1,13 +1,9 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Objects;
-
 public class Main {
     public static void main(String[] args) {
 
-        WeatherReportCore weatherReportCore = new WeatherReportCore(
+        WeatherReportCore weatherReportCore = WeatherReportCore.getInstance(
                 new WeatherReportFileReader("input.txt", new WeatherReportFileParser())
         );
 
